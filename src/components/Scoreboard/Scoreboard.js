@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import Player from "../Player/Player";
 
+// Function for sorting by player score
 function compare_score(player_a, player_b) {
-  console.log("Test player B", player_b);
   return player_b.score - player_a.score;
 }
+
+// Function for sorting player by name
 const compare_name = (a, b) => a.name.localeCompare(b.name);
 
 export default function Scoreboard() {
@@ -16,19 +18,19 @@ export default function Scoreboard() {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
-  const [sort_by, set_sort_by] = useState("score"); // either "score" or "name"
-  console.log("sortby:", sort_by);
+  // set default sort as score
+  const [sort_by, set_sort_by] = useState("score");
 
+  // Sort function by score or by name
   const sortFunction = sort_by === "score" ? compare_score : compare_name;
 
   // first "copy" the array
   const players_copy = [...players];
   // then sort it with the `compare_score` callback function
-  console.log("text players copy", players_copy);
   const players_sorted = players_copy.sort(sortFunction);
 
+  // Change value when event is triggered
   const change_sorting = (event) => {
-    console.log("new sort order:", event.target.value);
     set_sort_by(event.target.value);
   };
 
